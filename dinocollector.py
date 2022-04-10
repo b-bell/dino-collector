@@ -27,6 +27,12 @@ driver = webdriver.Chrome(PATH)
 
 # Login process
 driver.get('https://discord.com/login')
+driver.execute_script(
+    "alert('Welcome to the Dino Collector! You have " +
+    str(login_time_secs) +
+    " seconds to log in. Otherwise, the program will exit. This can be changed in the" +
+    " config.ini file in your installation folder.');"
+)
 time.sleep(login_time_secs)
 
 # Get to work
