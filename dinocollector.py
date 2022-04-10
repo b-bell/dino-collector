@@ -14,7 +14,7 @@ login_time_secs = int(config['GENERAL']['LoginTimeSecs'])
 collection_time_hrs = int(config['GENERAL']['CollectionTimeHours'])
 days = int(config['GENERAL']['Days'])
 channel_dict = json.loads(config['GENERAL']['ChannelsAndCommands'])
-page_transition_time_secs = int(config['DEVELOPER']['PageTransitionTimeSecs'])
+page_wait_time_secs = int(config['DEVELOPER']['PageWaitTimeSecs'])
 message_box_xpath = config['DEVELOPER']['MessageBoxXPath']
 
 # Perform conversions
@@ -34,7 +34,7 @@ for i in range(iterations):
     channel_list = list(channel_dict.keys())
     for channel_url in channel_list:
         driver.get(channel_url)
-        time.sleep(page_transition_time_secs)
+        time.sleep(page_wait_time_secs)
         text_element = driver.find_element_by_xpath(message_box_xpath)
         text_element.send_keys(channel_dict[channel_url])
         text_element.send_keys(Keys.ENTER)
