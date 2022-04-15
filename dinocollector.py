@@ -49,4 +49,3 @@ for i in range(iterations):
 
     if i != iterations - 1:
         time.sleep(collection_time_secs)
-        print(collection_time_secs)
