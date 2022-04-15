@@ -1,9 +1,11 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 import configparser
 import json
 import time
-import os
 
 # Initiate config file
 config = configparser.ConfigParser()
@@ -22,8 +24,8 @@ collection_time_secs = collection_time_hrs * 60 * 60
 iterations = int(days * 24 / collection_time_hrs)
 
 # Initiate chrome driver
-PATH = os.getcwd() + '\chromedriver.exe'
-driver = webdriver.Chrome(PATH)
+service = Service(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
 
 # Login process
 driver.get('https://discord.com/login')
@@ -41,7 +43,7 @@ for i in range(iterations):
     for channel_url in channel_list:
         driver.get(channel_url)
         time.sleep(page_wait_time_secs)
-        text_element = driver.find_element_by_xpath(message_box_xpath)
+        text_element = driver.find_element(By.XPATH, message_box_xpath)
         text_element.send_keys(channel_dict[channel_url])
         text_element.send_keys(Keys.ENTER)
 
