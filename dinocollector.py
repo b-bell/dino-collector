@@ -6,6 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import configparser
 import json
 import time
+import logging
 
 # Initiate config file
 config = configparser.ConfigParser()
@@ -43,9 +44,18 @@ for i in range(iterations):
     for channel_url in channel_list:
         driver.get(channel_url)
         time.sleep(page_wait_time_secs)
-        text_element = driver.find_element(By.XPATH, message_box_xpath)
-        text_element.send_keys(channel_dict[channel_url])
-        text_element.send_keys(Keys.ENTER)
+        try:
+            text_element = driver.find_element(By.XPATH, message_box_xpath)
+            text_element.send_keys(channel_dict[channel_url])
+            text_element.send_keys(Keys.ENTER)
+        except:
+            logging.basicConfig(filename='error.log',
+                encoding='utf-8',
+                level=logging.ERROR,
+                format='%(asctime)s %(message)s'
+            )
+            logging.exception('Dino Bot was unable to write a command')
+            quit()
 
     if i != iterations - 1:
         time.sleep(collection_time_secs)
