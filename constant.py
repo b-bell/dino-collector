@@ -4,6 +4,7 @@ import json
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+DISCORD_LOGIN_URL = 'https://discord.com/login'
 LOGIN_TIME_SECS = int(config['GENERAL']['LoginTimeSecs'])
 COLLECTION_TIME_SECS = int(config['GENERAL']['CollectionTimeHours']) * 60 * 60
 ITERATIONS = int(int(config['GENERAL']['Days']) * 24 / int(config['GENERAL']['CollectionTimeHours']))
