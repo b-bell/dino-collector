@@ -56,7 +56,6 @@ section "install"
 	file "squaredino.ico"
 	# Add any other files for the install directory (license files, app data, etc) here
 	file "config.ini"
-	file "chromedriver.exe"
  
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
 	writeUninstaller "$INSTDIR\uninstall.exe"
@@ -105,7 +104,6 @@ section "uninstall"
 	delete $INSTDIR\dinocollector.exe
 	delete $INSTDIR\squaredino.ico
 	delete $INSTDIR\config.ini
-	delete $INSTDIR\chromedriver.exe
  
 	# Always delete uninstaller as the last action
 	delete $INSTDIR\uninstall.exe
