@@ -24,9 +24,11 @@ message_box_xpath = config['DEVELOPER']['MessageBoxXPath']
 collection_time_secs = collection_time_hrs * 60 * 60
 iterations = int(days * 24 / collection_time_hrs)
 
-# Initiate chrome driver
+# Initiate chrome driver with unecessary default switches excluded
 service = Service(executable_path=ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+options = webdriver.ChromeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+driver = webdriver.Chrome(service=service, options=options)
 
 # Login process
 driver.get('https://discord.com/login')
