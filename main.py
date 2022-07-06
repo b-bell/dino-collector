@@ -1,8 +1,8 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 from retry import retry
 import constant
 import time
@@ -16,7 +16,7 @@ def write_command(message_box_xpath, command):
 
 if __name__ == '__main__':
     # Initiate chrome driver with unecessary default switches excluded
-    service = Service(executable_path=ChromeDriverManager().install())
+    service = ChromeService(executable_path=ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(service=service, options=options)
